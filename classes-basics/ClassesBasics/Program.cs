@@ -6,7 +6,8 @@
         {
             Console.WriteLine("Hello, World!");
 
-            HomeWork.TaskAlfaRun();
+            //HomeWork.TaskAlfaRun(); // H1T1
+            HomeWork.TaskBravoRun(); // H1T2
         }
     }
 }
