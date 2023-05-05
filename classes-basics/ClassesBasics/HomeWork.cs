@@ -6,6 +6,7 @@ namespace ClassesBasics
 {
     internal static class HomeWork
     {
+        #region HomeWorkTasks 1
         public static void TaskAlfaRun()
         {
             Address workAddress = new Address();
@@ -47,6 +48,22 @@ namespace ClassesBasics
 
         }
 
+
+        public static void TaskCharlieRun()
+        {
+            Book book = new Book();
+
+            book.Title = GetValidString("Enter book title: ");
+            book.Author = GetValidString("Enter book author: ");
+            book.Content = GetValidString("Enter body of the book: ");
+
+            book.Show();
+        }
+        #endregion
+
+
+
+        #region UserInterface
         private static double GetValidInputValue(string messageForInput)
         {
             double userInputValue;
@@ -60,5 +77,26 @@ namespace ClassesBasics
 
             return userInputValue;
         }
+
+
+        private static string GetValidString(string messageForInput)
+        {
+            Console.Write(messageForInput);
+            bool isStringValid = false;
+            string userString = default;
+
+            while (!isStringValid)
+            {
+                userString = Console.ReadLine();
+                isStringValid = !string.IsNullOrWhiteSpace(userString);
+
+                if (!isStringValid) { Console.WriteLine("The string could not be empty or contain only spaces."); }
+            }
+
+            return userString;
+        }
+
+        #endregion
+
     }
 }
