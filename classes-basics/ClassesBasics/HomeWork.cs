@@ -39,8 +39,10 @@ namespace ClassesBasics
         public static void TaskBravoRun()
         {
             //Написать программу, которая принимает от пользователя длины двух сторон прямоугольника и выводит  на экран периметр и площадь.
-            double firstRectangleSide = GetValidInputValue("Enter first side of rectangle: ");
-            double secondRectangleSide = GetValidInputValue("Enter second side of rectangle: ");
+            double firstRectangleSide;
+            GetValidInputValue("Enter first side of rectangle: ", out firstRectangleSide);
+            double secondRectangleSide;
+            GetValidInputValue("Enter second side of rectangle: ", out secondRectangleSide);
 
             Rectangle userRectangle = new Rectangle(firstRectangleSide, secondRectangleSide);
             Console.WriteLine(new string('-', 50));
@@ -59,23 +61,63 @@ namespace ClassesBasics
 
             book.Show();
         }
+
+
+        public static void TaskDeltaRun() 
+        {
+            Console.WriteLine("Enter points names and coordinates for figure: ");
+            
+            Point[] points = new Point[3];
+
+            int count = 0;
+            
+            while(true)
+            {
+                string pointName = GetValidString("Point name: ");
+                GetValidInputValue("X: ", out int xCoordinate);
+                GetValidInputValue("Y: ", out int yCoordinate);
+
+                points[count++] = new Point(pointName, xCoordinate, yCoordinate);
+
+                if(count == points.Length)
+                {
+                    Console.Write("You want create one more point?(Y/N)");
+                    var key = Console.ReadKey().Key;
+                    Console.WriteLine();
+                    
+                    if (key != ConsoleKey.Y) break;
+                    Array.Resize(ref points, points.Length + 1);
+                }
+            }
+
+            Figure figure = new Figure(points);
+
+            Console.WriteLine($"Your figure name is {figure.Name} it's perimeter {figure.Perimetr:F3}");
+        }
         #endregion
 
 
 
         #region UserInterface
-        private static double GetValidInputValue(string messageForInput)
+        private static void GetValidInputValue(string messageForInput, out double userInputValue)
         {
-            double userInputValue;
             Console.Write(messageForInput);
-
             while (!double.TryParse(Console.ReadLine(), out userInputValue) || userInputValue <= 0)
             {
                 Console.WriteLine("You entered wrong data...");
                 Console.Write(messageForInput);
             }
+        }
 
-            return userInputValue;
+
+        private static void GetValidInputValue(string messageForInput, out int userInputValue)
+        {
+            Console.Write(messageForInput);
+            while (!int.TryParse(Console.ReadLine(), out userInputValue))
+            {
+                Console.WriteLine("You entered wrong data...");
+                Console.Write(messageForInput);
+            }
         }
 
 
@@ -83,7 +125,7 @@ namespace ClassesBasics
         {
             Console.Write(messageForInput);
             bool isStringValid = false;
-            string userString = default;
+            string? userString = default;
 
             while (!isStringValid)
             {
