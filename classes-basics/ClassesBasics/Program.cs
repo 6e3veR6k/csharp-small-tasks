@@ -1,4 +1,6 @@
-﻿namespace ClassesBasics
+﻿using ClassesBasics.Troelsen.PartOne;
+
+namespace ClassesBasics
 {
     internal class Program
     {
@@ -9,7 +11,9 @@
             //HomeWork.TaskAlfaRun();      // H1T1
             //HomeWork.TaskBravoRun();     // H1T2
             //HomeWork.TaskCharlieRun();   // H1T3
-            HomeWork.TaskDeltaRun();     // H1T4
+            //HomeWork.TaskDeltaRun();     // H1T4
+
+            AlfaClass.HelloWorld();
         }
     }
 }
